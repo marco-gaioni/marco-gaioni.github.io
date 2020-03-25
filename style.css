@@ -7,16 +7,6 @@
 	margin:20px;
 }
 
-.griglia > li{
-	display: inline-block;
-	margin: 10px;
-	text-align: center;
-	max-width: 500px;
-	vertical-align: middle;
-}
-
-
-
 .progress-bar-vertical {
   width: 50px;
   min-height: 100%;
@@ -33,4 +23,3 @@
   -o-transition: height 0.6s ease;
   transition: height 0.6s ease;
 }
-
