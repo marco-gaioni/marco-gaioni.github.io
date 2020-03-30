@@ -69,6 +69,7 @@ vincite = ["500", "1.000", "1.500", "2.000", "3.000", "5.000", "7.000", "10.000"
 
 let indexDomanda=-1;
 const NUM_DOMANDE = 15;
+let wannawin = 0
 
 function shuffle(array) {
  	var currentIndex = array.length, temporaryValue, randomIndex;
@@ -96,6 +97,7 @@ const Populate = ()=> {
 	document.getElementById("btn3").innerHTML = domandarandom[0].opzioni[2];
 	document.getElementById("btn4").innerHTML = domandarandom[0].opzioni[3];
 	domande.shift(domandarandom)
+	wannawin++
 
 };
 
@@ -107,33 +109,35 @@ function Timer(clearinterval=false){
 		clearInterval(timer);
 		return;
 	}
-	let maxTimer = 60;
+	let maxTimer = 61;
 	let y = 0
 	//let timer = setInterval(function() { 
 	timer = setInterval(function() { 
 		y += 1;
 		let t = maxTimer - y; 
 		const countdown = document.getElementById("countdown");
-		const barra = document.getElementById("demo");
-		countdown.innerHTML = t + " sec"; 
-		let currBar = 100*t/maxTimer;
-		barra.style.width = String(currBar) + "%";
+		countdown.innerHTML = t; 
 		if (t < 0) { 
 			clearInterval(timer);
 			countdown.innerHTML = "TEMPO SCADUTO"; 
+			temposcaduto()
 		} 
 	}, 1000); 
 };
 
-let dom;
+
+
+
 
 function GetStarted(){
-	document.getElementById("paragrafo introduttivo").style.display = "none";
+	document.getElementById("intestazione").style.display ="none";
+	document.getElementById("introduction").style.display = "none";
+	document.getElementById("logodomanda").style.display="block";
 	document.getElementById("countdown").style.display = "block";
-	document.getElementById("barra").style.display = "flex";
 	document.getElementById("btniniziale").style.display = "none";
 	document.getElementById("domgroup").style.display = "block";
 	document.getElementById("montepremi").style.display = "flex";
+
 	//Populate();
 	dom = shuffle(domande);
 	//NextDomanda(0)
@@ -163,19 +167,18 @@ function NextDomanda(buttonid=0){
 		let i = buttonsid.indexOf(buttonid);
 		let x = buttonsid.splice(i,1);
 		buttonsid.forEach((e, i, arr) => document.getElementById(e).disabled = true);
-
 		rispostaselzionata = $(document.getElementById(buttonid)).text();
-		if (giuste.includes(stringToHash(rispostaselzionata))){
+		if (giuste.includes(stringToHash(rispostaselzionata)) && wannawin<NUM_DOMANDE){
 			document.getElementById("giusto").style.display = "block";
-			document.getElementById("sbagliato").style.display = "none";
+			//document.getElementById("sbagliato").style.display = "none";
 			document.getElementById("proxdomanda").style.display = "block";
 			BarIncrement(indexDomanda);
 		}
+		else if (wannawin === NUM_DOMANDE){
+			win()
+		}
 		else{
-			document.getElementById("giusto").style.display = "none";
-			document.getElementById("sbagliato").style.display = "block";
-			document.getElementById("proxdomanda").style.display = "none";
-			GameOver()
+			lose()
 		} 
 		buttonsid.push(buttonid);
 	}
@@ -211,4 +214,27 @@ function BarIncrement(indexDomanda){
 	barra.innerHTML = vincite[15*currBar/100-1];
 }
 
+function win(){
+	document.getElementById("spaziodomanda").style.display="none";
+	document.getElementById("intestazione").style.display="block";
+	document.getElementById("tutto").style.display = "none";
+	document.getElementById("vinto").style.display = "block";
+ 	document.getElementById("rigioca").style.display="block";
+}
 
+function lose(){
+	document.getElementById("spaziodomanda").style.display="none";
+	document.getElementById("intestazione").style.display="block";
+	document.getElementById("tutto").style.display = "none";
+	document.getElementById("perso-errore").style.display = "block";
+ 	document.getElementById("rigioca").style.display="block";
+}
+
+function temposcaduto(){
+	document.getElementById("spaziodomanda").style.display="none";
+	document.getElementById("intestazione").style.display="block";
+	document.getElementById("tutto").style.display = "none";
+	document.getElementById("perso-tempo").style.display = "block";
+	document.getElementById("rigioca").style.display="block";
+
+}
