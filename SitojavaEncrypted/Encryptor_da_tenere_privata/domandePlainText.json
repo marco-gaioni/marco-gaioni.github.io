@@ -1,0 +1,331 @@
+[{
+  "domanda":"Quale tra questi non è un sinonimo di piccolezza",
+  "risposte":[
+    {
+      "risposta":"Esiguità",
+      "isCorrect":false
+    },
+    {
+      "risposta":"Mediocrità",
+      "isCorrect":false
+    },
+    {
+      "risposta":"Limitatezza",
+      "isCorrect":false
+    },
+    {
+      "risposta":"Rilevanza",
+      "isCorrect":true,
+      "descrizione": "rilevanza s. f. [der. di rilevante]. – Il fatto, la caratteristica di essere rilevante, cioè di notevole importanza o anche gravità, soprattutto riguardo a determinati fini."
+    }
+  ]
+ },
+ {
+  "domanda":"Al Jazeera è:",
+  "risposte":[
+    {
+      "risposta":"Un'associazione terroristica",
+      "isCorrect":false
+    },
+    {
+      "risposta":"Una sezione del Corano",
+      "isCorrect":false
+    },
+    {
+      "risposta":"Uno scrittore arabo",
+      "isCorrect":false
+    },
+    {
+      "risposta":"L'emittente ufficiale del mondo arabo",
+      "isCorrect":true,
+      "descrizione": "Al Jazeera è una rete televisiva satellitare con sede in Qatar, talvolta menzionata come Al Jazira."
+    }
+  ]
+ },
+ {
+  "domanda":"Chi scrisse la commedia 'La Mandragola?'",
+  "risposte":[
+    {
+      "risposta":"Verga",
+      "isCorrect":false
+    },
+    {
+      "risposta":"Del Tufo",
+      "isCorrect":false
+    },
+    {
+      "risposta":"Tasso",
+      "isCorrect":false
+    },
+    {
+      "risposta":"Machiavelli",
+      "isCorrect":true,
+      "descrizione": "Mandragola è una commedia di Niccolò Machiavelli, considerata il capolavoro del teatro del Cinquecento e un classico della drammaturgia italiana. Composta da un prologo e cinque atti, è una potente satira sulla corruttibilità della società italiana dell'epoca."
+    }
+  ]
+ },
+ {
+  "domanda":"Quale tra queste affermazioni su Dante Alighieri è falsa?",
+  "risposte":[
+    {
+      "risposta":"E' nato a Firenze",
+      "isCorrect":false
+    },
+    {
+      "risposta":"Ha fatto parte dei guelfi bianchi",
+      "isCorrect":false
+    },
+    {
+      "risposta":"Ha scritto il Convivio",
+      "isCorrect":false
+    },
+    {
+      "risposta":"Ha scritto l'Aminta",
+      "isCorrect":true,
+      "descrizione": "L'Aminta è una favola pastorale composta da Torquato Tasso nel 1573 e pubblicata nel 1580 circa. La prima rappresentazione ebbe luogo con buone probabilità al Belvedere di Ferrara"
+    }
+  ]
+ },
+ {
+    "domanda":"Chi è il regista di 'Jurassik Park'?",
+    "risposte":[
+      {
+        "risposta":"Steven Spielberg",
+        "isCorrect":true,
+        "descrizione": "Steven Allan Spielberg è un regista, sceneggiatore, produttore cinematografico e produttore televisivo statunitense. Alcune opere di Spielberg sono tra le più popolari del cinema statunitense. È stato tra i fondatori della Amblin Entertainment e della DreamWorks"
+      },
+      {
+        "risposta":"Quentin Tarantino",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Martin Scorsese",
+        "isCorrect":false
+      },
+      {
+        "risposta":"James Cameron",
+        "isCorrect":false
+      }
+    ]
+   },
+ {
+    "domanda":"Cosa rappresentava il primo film proiettato al cinema?",
+    "risposte":[
+      {
+        "risposta":"Un treno",
+        "isCorrect":true,
+        "descrizione": "L'arrivo di un treno alla stazione di La Ciotat è uno dei più famosi cortometraggi dei fratelli Auguste e Louis Lumière. E' un film 35 mm, in bianco e nero, muto, della durata di 45 secondi circa."
+      },
+      {
+        "risposta":"Un razzo lanciato sulla luna",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Una guerra",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Degli operai in fabbrica",
+        "isCorrect":false
+      }
+    ]
+ },
+ {
+    "domanda":"Chi conduce 'Che tempo che fa'?",
+    "risposte":[
+      {
+        "risposta":"Fabio Fazio",
+        "isCorrect":true,
+        "descrizione": "Fabio Fazio è un conduttore televisivo, autore televisivo, imitatore, scrittore e produttore televisivo italiano. Ad oggi è uno dei conduttori televisivi più famosi e di maggior successo in Italia, condusse 4 edizioni del Festival di Sanremo (1999, 2000, 2013 e 2014)."
+      },
+      {
+        "risposta":"Amadeus",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Carlo Conti",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Flavio Insinna",
+        "isCorrect":false
+      }
+    ]
+ },
+ {
+    "domanda":"Chi scrisse 'Madame Bovary?",
+    "risposte":[
+      {
+        "risposta":"Gustave Flaubert",
+        "isCorrect":true,
+        "descrizione": "Gustave Flaubert è stato uno scrittore francese. Considerato l'iniziatore del naturalismo nella letteratura francese, è conosciuto soprattutto per essere l'autore del romanzo Madame Bovary e per l'accusa di immoralità che questa opera gli procurò"
+      },
+      {
+        "risposta":"Emile Zola",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Stendhal",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Honoré de Balzac",
+        "isCorrect":false
+      }
+    ]
+ },
+ {
+    "domanda":"Quale stato è nato il 14 maggio 1948?",
+    "risposte":[
+      {
+        "risposta":"Israele",
+        "isCorrect":true,
+        "descrizione": "Lo stato d’Israele venne proclamato dal leader David Ben Gurion il 14 maggio 1948 ed è ufficialmente entrato in essere il 15, quando, alla mezzanotte, terminò il precedente mandato Britannico. In molte menti, la nascita d'Israele è collegata strettamente col terrore Nazista e l'olocausto, ma la concezione e la pianificazione di uno stato israeliano era iniziata circa 60 anni prima."
+      },
+      {
+        "risposta":"Iran",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Giordania",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Guatemala",
+        "isCorrect":false
+      }
+    ]
+ },
+ {
+    "domanda":"Qual è il monumento più famoso di Piazza dei Miracoli?",
+    "risposte":[
+      {
+        "risposta":"Torre di Pisa",
+        "isCorrect":true,
+        "descrizione": "La torre di Pisa (popolarmente torre pendente e, a Pisa, la Torre) è il campanile della cattedrale di Santa Maria Assunta, nella celeberrima piazza del Duomo di cui è il monumento più famoso per via della caratteristica pendenza, simbolo di Pisa e fra i simboli iconici d'Italia. Si tratta di un campanile a sé stante alto 57 metri (58,36 metri considerando il piano di fondazione) costruito nell'arco di due secoli, tra il dodicesimo e il quattordicesimo secolo."
+      },
+      {
+        "risposta":"Palazzo Medici",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Duomo",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Battistero di San Giovanni",
+        "isCorrect":false
+      }
+    ]
+ },
+ {
+    "domanda":"Chi cadde da cavallo vedendo Gesù?",
+    "risposte":[
+      {
+        "risposta":"San Paolo",
+        "isCorrect":true,
+        "descrizione": "Paolo di Tarso, nato con il nome di Saulo e noto come san Paolo, è stato uno scrittore e teologo cristiano. È stato l'«apostolo dei Gentili», ovvero il principale (secondo gli Atti degli Apostoli) missionario del Vangelo di Gesù tra i pagani greci e romani. Secondo i testi biblici, Paolo era un ebreo ellenizzato, che godeva della cittadinanza romana."
+      },
+      {
+        "risposta":"San Giovanni",
+        "isCorrect":false
+      },
+      {
+        "risposta":"San Tommaso",
+        "isCorrect":false
+      },
+      {
+        "risposta":"San Bartolomeo",
+        "isCorrect":false
+      }
+    ]
+ },
+ {
+    "domanda":"Quale artista si innamorò della 'fornarina'?",
+    "risposte":[
+      {
+        "risposta":"Raffaello",
+        "isCorrect":true,
+        "descrizione": "La Fornarina è un dipinto a olio su tavola (85x60 cm) di Raffaello Sanzio, databile al 1518–1519 circa e conservato nella Galleria Nazionale d'Arte Antica di Palazzo Barberini a Roma. È firmato sul bracciale della donna: RAPHAEL VRBINAS."
+      },
+      {
+        "risposta":"Michelangelo",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Giotto",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Leonardo",
+        "isCorrect":false
+      }
+    ]
+ },
+ {
+    "domanda":"Nel 'Decameron', quale pietra conferisce l'invisibilità?",
+    "risposte":[
+      {
+        "risposta":"Elitropia",
+        "isCorrect":true,
+        "descrizione": "Calandrino e l’elitropia è una novella narrata da Elissa nell’ottava giornata del Decameron, quella dedicata a racconti di beffe e scherzi tra uomini e donne."
+      },
+      {
+        "risposta":"Quarzo",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Diamante",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Topazio",
+        "isCorrect":false
+      }
+    ]
+ },
+ {
+    "domanda":"Chi scrisse il flauto magico?",
+    "risposte":[
+      {
+        "risposta":"Mozart",
+        "isCorrect":true,
+        "descrizione": "Wolfgang Amadeus Mozart è stato un musicista austriaco a cui è universalmente riconosciuta la creazione di composizioni di straordinario valore artistico. Annoverato tra i massimi geni della storia della musica, dotato di raro e precoce talento, iniziò a comporre all'età di cinque anni e morì all'età di trentacinque."
+      },
+      {
+        "risposta":"Beethoven",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Bach",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Rossini",
+        "isCorrect":false
+      }
+    ]
+ },
+ {
+    "domanda":"A quale popolo è dedicata 'Va pensiero'?",
+    "risposte":[
+      {
+        "risposta":"Ebraico",
+        "isCorrect":true,
+        "descrizione": "Va, pensiero (Va, pensiero, sull'ali dorate) è uno dei cori più noti della storia dell'opera, collocato nella parte terza del Nabucco di Giuseppe Verdi (1842), dove viene cantato dagli Ebrei prigionieri in Babilonia. Il poeta Temistocle Solera scrisse i versi ispirandosi al salmo 137, Super flumina Babylonis (Sui fiumi di Babilonia)."
+      },
+      {
+        "risposta":"Egizio",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Babilonese",
+        "isCorrect":false
+      },
+      {
+        "risposta":"Curdo",
+        "isCorrect":false
+      }
+    ]
+ }
+]

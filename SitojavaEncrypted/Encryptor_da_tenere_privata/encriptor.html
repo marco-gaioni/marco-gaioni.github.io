@@ -1,0 +1,95 @@
+<html>
+	<head>
+		<style>
+
+			td {
+			  height: 50px;
+			  vertical-align: top;
+			}	
+		</style>
+	</head>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+
+	<h1>Encryption / Decryption Tool - Filippo Montanari</h1>
+	<hr>
+	<table>
+		<tr>
+			<td><h2>Encryption</h2></td>
+			<td><h2>Decryption</h2></td>
+		</tr>
+		<tr>
+			<td>
+				<!-- Inizio Encryption -->
+				<p><label>Plain JSON</label> (Inserire in questo campo le domande come JSON)</p>
+				<p><textarea id="plainJSON" rows="8" cols="70"></textarea></p>
+				<p><button onclick="Encrypt()">Encrypt</button></p>
+				<hr>
+				<p><label>Encrypted Text</label></p>
+				<p><textarea readonly id="encryptedResult" rows="8" cols="70"></textarea></p>
+				<p><button onclick="saveFile()">Save encrypted file</button></p>
+				<p>Il file salvato conterrà il json criptato. Per usarlo dal sito è necessario creare il file <b>domandeEncrypetd.js</b> nella cartella del sito stesso, con una variabile testuale chiamata <i>ecrypetdJSON</i> contenente il json criptato</p>
+				<h4>Esempio di domandeEncrypetd.js:</h4>
+				<p><code>let ecrypetdJSON = "U2FsdGVkX....";</code></p>
+				<hr>
+				<h3>Encryption check</h3>
+				<p><label>Decrypted</label></p>
+				<p><textarea readonly id="decryptedTest" rows="8" cols="70"></textarea></p>
+				<p><label>Decrypted Text</label></p>
+				<p><textarea readonly id="decryptedJSONTest" rows="8" cols="70"></textarea></p>
+				<!-- Fine Encryption -->
+			</td>
+			<td>
+				<!-- Inizio Decryption -->
+				<p><label>Encrypted Text</label></p>
+				<p><textarea id="encryptedSource" rows="8" cols="70"></textarea></p>
+				<p><button onclick="Decrypt()">Decrypt</button></p>
+				<hr>
+				<p><label>Decrypted Text</label></p>
+				<p><textarea readonly id="decryptedJSON" rows="8" cols="70"></textarea></p>
+				<!-- Fine Decryption -->
+			</td>
+		</tr>
+	</table>
+
+	<script>
+		const SECRET = "Secre7:Pa55phras3";
+
+		function Encrypt() {
+			let plainText = document.getElementById("plainJSON").value;
+		  	let encrypted = CryptoJS.AES.encrypt(plainText, SECRET);
+			let decrypted = CryptoJS.AES.decrypt(encrypted, SECRET);
+			document.getElementById("encryptedResult").innerHTML = encrypted;
+			document.getElementById("decryptedTest").value = decrypted;
+			document.getElementById("decryptedJSONTest").value = decrypted.toString(CryptoJS.enc.Utf8);
+		}
+
+		function Decrypt() {
+			let encryptedText = document.getElementById("encryptedSource").value;
+			let decrypted = CryptoJS.AES.decrypt(encryptedText, SECRET);
+			document.getElementById("decryptedJSON").value = decrypted.toString(CryptoJS.enc.Utf8);
+		}
+
+		function saveFile() {
+		  var input = document.getElementById("encryptedResult")
+		  saveData(input.value, "domandeEncrypted.json");
+		  
+		  e.preventDefault()
+		}
+
+		function saveData(data, fileName) {
+		    var a = document.createElement("a");
+		    document.body.appendChild(a);
+		    a.style = "display: none";
+
+		    var json = JSON.stringify(data),
+		        blob = new Blob([data], {type: "text/plain;charset=utf-8"}),
+		        url = window.URL.createObjectURL(blob);
+		    a.href = url;
+		    a.download = fileName;
+		    a.click();
+		    window.URL.revokeObjectURL(url);
+		}
+	</script>
+</html>
