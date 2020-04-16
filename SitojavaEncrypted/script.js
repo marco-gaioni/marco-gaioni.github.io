@@ -4,8 +4,6 @@ const aiutiid = ["fifty1", "fifty2", "switch1", "switch2"]
 
 let indexDomanda=-1;
 const NUM_DOMANDE = 15;
-const NUM_AIUTI_5050 = 2;
-const NUM_AIUTI_SWITCH = 2;
 let wannawin = 0;
 
 const SECRET = "Secre7:Pa55phras3";
@@ -15,9 +13,11 @@ let lastclick = null;
 let lastrisp = null;
 let aiutoUsatoInDom=-1;	//contiene il numero della domanda in cui è stato usato un aiuto per l'ultima volta
 let fiftyfiftyjustused = false;
+let switchjustused = false;
 let actualid = null;
+let domandeXswitch;
+let rispostaFornita=false;	// True solo quando si è risposto ad una domanda, e si è in attesa della domanda successiva prima di cliccare il bottone "Prossima Domanda"
 
-//funzione che mi cripta le domande
 function decryptDomande() {
 	// leggo dal file domandeEncrypetd.js la variabile ecrypetdJSON contenente le domande in formato
 	// json criptate e le decripto usando SECRET (la stessa parola chiave con cui le ho criptate)
@@ -27,7 +27,7 @@ function decryptDomande() {
 	return JSON.parse(domandeStr);
 }
 
-//mescolatore delle domande
+
 function shuffle(array) {
  	var currentIndex = array.length, temporaryValue, randomIndex;
 	// While there remain elements to shuffle...
@@ -64,35 +64,49 @@ function Timer(clearinterval=false){
 		clearInterval(timer);
 		return;
 	}
-	let maxTimer = 61;
+	let maxTimer = 60;
 	let y = 0
+	//let timer = setInterval(function() { 
 	timer = setInterval(function() { 
 		y += 1;
 		let t = maxTimer - y; 
 		const countdown = document.getElementById("countdown");
-		countdown.innerHTML = t; 
-		if (t === 0) { 
-			clearInterval(timer); 
+		const barra = document.getElementById("demo");
+		countdown.innerHTML = t + " sec"; 
+		let currBar = 100*t/maxTimer;
+		barra.style.width = String(currBar) + "%";
+		if (t < 0) { 
+			clearInterval(timer);
+			countdown.innerHTML = "TEMPO SCADUTO"; 
 			temposcaduto();
 		} 
 	}, 1000); 
 };
 
+
+
 let dom;
 
-//funzione start quando clicco su "iniziamo"
 function GetStarted(){
 	domande = decryptDomande();
-	document.getElementById("brand").style.display = "none";
-	document.getElementById("introduction").style.display = "none";
+	document.getElementById("countdown").style.display = "block";
+	document.getElementById("barra").style.display = "flex";
 	document.getElementById("btniniziale").style.display = "none";
-	document.getElementById("schermatadomanda").style.display = "block";
+	document.getElementById("domgroup").style.display = "block";
+	document.getElementById("montepremi").style.display = "flex";
+	document.getElementById("intestazione").style.display = "none";
+	document.getElementById("switchenfifty").style.display = "block";
+
+	//Populate();
 	dom = shuffle(domande);
+
+	//popolo l'array di domande da usare per l'aiuto switch con le domande escluse (oltre la pos. NUM_DOMANDE nell'array dom)
+	domandeXswitch = dom.slice(NUM_DOMANDE, -1)
 	ProxDom();
 };
 
-//verifica che il testo della rsiposta sia quello corretto
-function Verifica(indexDomanda, buttonid){
+
+function Verifica(indexDomanda, buttonid, contaSeGiusta=true){
 	rispostaselzionata = $(document.getElementById(buttonid)).text();
 	risposteList = domande[indexDomanda].risposte;
 	ret = false;
@@ -101,67 +115,81 @@ function Verifica(indexDomanda, buttonid){
 	  if (risposteList[i].risposta === rispostaselzionata){
 			if (risposteList[i].isCorrect){
 				ret = risposteList[i].isCorrect;
-				scopri.innerHTML = risposteList[i].descrizione;
-				++ wannawin;
+				if (contaSeGiusta){
+					scopri.innerHTML = risposteList[i].descrizione;
+					++ wannawin;
+				}
 			};
 		};
 	}
 	return ret;
 };
 
-//funzione che gestisce la verifica e l'utilizzo degli aiuti
+
 function NextDomanda(buttonid=0){
+	rispostaFornita=true;
+
 	if (lastclick === buttonid && lastrisp === $(document.getElementById(buttonid)).text()){
 		alert("Hai già risposto");
 		return false;
-	}//se ho già cliccato una risposta lastlick assume il valore dell'id dell'stanza vera e propria del bottone e quindi non posso più rispondere
+	}
 
 	if (fiftyfiftyjustused === true){
 		aiutiid.forEach((e, i, arr) => document.getElementById(e).disabled = false);
 		document.getElementById(actualid).disabled = true;
+		fiftyfiftyjustused = false;
 	}
-
+	
+	if (switchjustused === true){
+		aiutiid.forEach((e, i, arr) => document.getElementById(e).disabled = false);
+		document.getElementById(actualid).disabled = true;
+		switchjustused = false;
+	}
+	
 	if (indexDomanda>=0){
-		
-		let i = buttonsid.indexOf(buttonid);//restituisce la prima occorrenza di buttonid
-		let x = buttonsid.splice(i,1);//rimuove dall'array l'occorenza trovata prima
-		buttonsid.forEach((e, i, arr) => document.getElementById(e).disabled = true);//tutti gli altri bottoni vengono disattivati
+		let i = buttonsid.indexOf(buttonid);
+		let x = buttonsid.splice(i,1);
+		buttonsid.forEach((e, i, arr) => document.getElementById(e).disabled = true);
 
-		if (Verifica(indexDomanda, buttonid) && wannawin<NUM_DOMANDE){
+		if (Verifica(indexDomanda, buttonid, true) && wannawin<NUM_DOMANDE){
 			let x = document.getElementById("haivintotot");
-			x.innerHTML = "Complimenti! Hai vinto " + vincite[indexDomanda] +"$. Vuoi approfondire l'argomento? Clicca il bottone qui sotto.";
+			x.innerHTML = "Complimenti! Hai vinto " + vincite[indexDomanda] +"$. Vuoi approfondire l'argomanto? Clicca il bottone qui sotto.";
 			$('#giusto').modal('show');
+			//document.getElementById("giusto").style.display = "block";
 			document.getElementById("proxdomanda").style.display = "block";
 			BarIncrement(indexDomanda);
-		}//se la risposta è corretta passo alla domanda successiva 
+		}
 		else if (wannawin === NUM_DOMANDE){
 			win();
-		}//se ho risposto a tutte le domande ho vinto
+		}
 		else{
 			$('#sbagliato').modal('show');
-		} // se sbaglio esce il modale con la possibilità di rigiocare
-		buttonsid.push(buttonid);//reinserisco nell'array l'id del bottone che avevo tolto
+			//document.getElementById("giusto").style.display = "none";
+		} 
+		buttonsid.push(buttonid);
 	}
 	//Populate(dom, ++indexDomanda);
 	Timer(true);
-	lastclick = buttonid;//lastclick assume il valore dell'id del bottone selezionato in modo tale da non poterlo più schiacciare
-	lastrisp = $(document.getElementById(buttonid)).text();//lastrisp assume il testo del bottone selezionato
+	lastclick = buttonid;
+	lastrisp = $(document.getElementById(buttonid)).text();
 };
 
-//funzione di accesso alla prossima domanda
 function ProxDom(){
+	alert("indexDomanda=" + indexDomanda + " - wannawin="+wannawin);
+
+	rispostaFornita=false;
 	document.getElementById("proxdomanda").style.display = "none";
 	buttonsid.forEach((e, i, arr) => document.getElementById(e).disabled = false);
 	Populate(dom, ++indexDomanda);
 	Timer();
 };
 
-//funzione di ricarica della pagina
+
 function Rigioca(){
 	window.location.reload();
 };
 
-//incrementatore della barra del montepremi
+
 function BarIncrement(indexDomanda){
 	const barra = document.getElementById("montepremiBar");
 	let currBar = 100 * (indexDomanda + 1)/NUM_DOMANDE;
@@ -169,37 +197,39 @@ function BarIncrement(indexDomanda){
 	barra.innerHTML = vincite[indexDomanda];
 };
 
-//funzione hai vinto
+
 function win(){
-	document.getElementById("brand").style.display="block";
-	document.getElementById("schermatadomanda").style.display = "none";
-	document.getElementById("vinto").style.display = "block";
+	let tutto = document.getElementById("tutto");
+	let haivinto = document.getElementById("vinto");
+	tutto.style.display = "none";
+	haivinto.style.display = "block";
 }
 
-//funzione per il tempo scaduto e visulaizzazione della pagina tempo scaduto
 function temposcaduto(){
-	document.getElementById("brand").style.display="block";
-	document.getElementById("schermatadomanda").style.display="none";
-	document.getElementById("perso").style.display="block";
+	let tutto = document.getElementById("tutto");
+	let perso = document.getElementById("perso");
+	tutto.style.display = "none";
+	perso.style.display = "block";
 }
 
-//funzione che mi controlla se un aiuto è utilizzabile
 function aiutoUtilizzabile(){
 	if (aiutoUsatoInDom===indexDomanda){
 		alert("Hai già usato un aiuto per questa domanda!");
+		return false;
+	}
+	else if (rispostaFornita){
+		alert("Hai già risposto, non puoi usare un aiuto!");
 		return false;
 	}
 	else
 		return true;
 }
 
-//funzione che mi esclude due possibilità sbagliate
 function aiutofiftyfifty(fiftyid){
 	if (!aiutoUtilizzabile())
 		return false;
 
 
-	fiftyfiftyjustused = false;
 	let i = aiutiid.indexOf(fiftyid);
 	let x = aiutiid.splice(i,1);
 	aiutiid.forEach((e, i, arr) => document.getElementById(e).disabled = true);
@@ -210,23 +240,73 @@ function aiutofiftyfifty(fiftyid){
 	shufflebutton.forEach((e, i, arr) => {
 		if (c === 2)
 			return false;
-		if (!Verifica(indexDomanda, e)){
+		if (!Verifica(indexDomanda, e, false)){
 			++ c;
 			document.getElementById(e).disabled = true;
 		}
 	}); 
+
+	// aiutiid.push(fiftyid);
+
 	aiutoUsatoInDom=indexDomanda;
 	fiftyfiftyjustused = true;
 	actualid = fiftyid;
-	document.getElementById(fiftyid).style.display="none"
 }
 
 function aiutoswitch(switchid){
 	if (!aiutoUtilizzabile())
 		return false;
+	
+	let i = aiutiid.indexOf(switchid);
+	let x = aiutiid.splice(i,1);
+	aiutiid.forEach((e, i, arr) => document.getElementById(e).disabled = true);
 
-	// TODO: creare logica
+	//Rimpiazzo la domanda corrente con la prima dell'array domandeXswitch e rimuovo l'elemento usato
+	dom[indexDomanda] = domandeXswitch.splice(0,1)[0];
+
+	Populate(dom, indexDomanda);
 
 	aiutoUsatoInDom=indexDomanda;
+	switchjustused = true;
+	actualid = switchid;
 }
 
+/*
+let maxTimer = 60;
+let y = 0
+let x = setInterval(function() { 
+y += 1;
+let t = maxTimer - y; 
+let countdown = document.getElementById("countdown");
+let barra = document.getElementById("demo");
+countdown.innerHTML = t + " sec"; 
+currBar = 100*t/maxTimer;
+barra.style.width = String(currBar) + "%";
+if (t < 0) { 
+	clearInterval(x);
+	countdown.innerHTML = "TEMPO SCADUTO"; 
+} 
+}, 1000); 
+
+
+*/
+/*let maxTimer = 60000;
+let y = 0
+let increment = 100;
+let x = setInterval(function() { 
+y += increment;
+let t = maxTimer - y; 
+let countdown = document.getElementById("countdown");
+let barra = document.getElementById("demo");
+
+if ((t%100)==0)
+	countdown.innerHTML = Math.floor(t/1000) + " sec"; 
+
+currBar = Math.floor(100*t/(maxTimer));
+barra.style.width = String(currBar) + "%";
+if (t <= 0) { 
+    clearInterval(x);
+    countdown.innerHTML = "TEMPO SCADUTO"; 
+} 
+}, increment); 
+*/
