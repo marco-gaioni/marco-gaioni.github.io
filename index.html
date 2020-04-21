@@ -22,7 +22,7 @@
   			<div class="collapse navbar-collapse" id="navbarNavDropdown">
     			<ul class="navbar-nav">
       				<li class="nav-item active">
-        				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        				<a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
       				</li>
       				<li class="nav-item">
         				<a class="nav-link" href="./info.html">Us</a>
@@ -59,7 +59,7 @@
 						</p>
 					</div>
 					<div class="centro">
-						<button type="button" class="btn btn-outline-warning" id="btniniziale" onclick="GetStarted()" style="margin: 10px;">Iniziamo</button>
+						<button type="button" class="btn btn-outline-warning" id="btniniziale" onclick="getStarted()" style="margin: 10px;">Iniziamo</button>
 					</div>
 				</div>
 
@@ -93,12 +93,12 @@
 
 							<!-- Risposte -->
 							<div class="btn-group-horizontal">
-								<button type="button" id="btn1" class="btn btn-outline-light btn-lg" style="margin: 20px; width: 400px;" onclick="NextDomanda(this.id)"></button>
-								<button type="button" id="btn2" class="btn btn-outline-light btn-lg" style="margin: 20px; width: 400px;" onclick="NextDomanda(this.id)"></button>
+								<button type="button" id="btn1" class="btn btn-outline-light btn-lg" style="margin: 20px; width: 400px;" onclick="moveTo(this.id)"></button>
+								<button type="button" id="btn2" class="btn btn-outline-light btn-lg" style="margin: 20px; width: 400px;" onclick="moveTo(this.id)"></button>
 							</div>
 							<div class="btn-group-horizontal" class="introduction">
-								<button type="button" id="btn3" class="btn btn-outline-light btn-lg" style="margin: 20px; width: 400px;" onclick="NextDomanda(this.id)"></button>
-								<button type="button" id="btn4" class="btn btn-outline-light btn-lg" style="margin: 20px; width: 400px;" onclick="NextDomanda(this.id)"></button>
+								<button type="button" id="btn3" class="btn btn-outline-light btn-lg" style="margin: 20px; width: 400px;" onclick="moveTo(this.id)"></button>
+								<button type="button" id="btn4" class="btn btn-outline-light btn-lg" style="margin: 20px; width: 400px;" onclick="moveTo(this.id)"></button>
 							</div>
 						</div>
 					</div>
@@ -139,30 +139,54 @@
 				    	</div>
 				  	</div>
 				</div>
+				<button type="button" class="btn btn-outline-warning" id="proxdomanda" onclick="generateQuestion()" style="margin: 10px; display:none;">Prossima domanda</button>
 
-				<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" id ="sbagliato">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-				    		<div class="modal-header">
-				        		<h5 class="modal-title" id="exampleModalLabel">Risposta errata!!</h5>
-				        		<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				        			<span aria-hidden="true">&times;</span>
-				        		</button>
-				    		</div>
-				      		<div class="modal-body">
-				        		Hai perso! Vuoi giocare di nuovo? Clicca il bottone qui sotto.
-				    		</div>
-				    		<div class="modal-footer">
-				    			<button type="button" class="btn btn-secondary" onclick="Rigioca()">Rigioca</button>
-							</div>
-				    	</div>
-				  	</div>
+
+				<div class="card mb-3 centro" id="vinto" style="width:1000px; display: none;background-color:#4b0082;border-color: #4b0082;">
+				  <div class="row no-gutters">
+				    <div class="col-md-4">
+				      <img src="jerryBalla.jpg" class="card-img" alt="...">
+				    </div>
+				    <div class="col-md-8">
+				      <div class="card-body">
+				        <h5 class="card-title text-white">Complimenti!!</h5>
+				        <p class="card-text text-white">Hai vinto 1.000.000 € in gettoni d'oro. Se ti va di rigiocare premi il pulsante "Rigioca" qua sotto</p>
+						<button type="button" class="btn btn-outline-warning" id="rigioca" onclick="playAgain()" style="margin: 10px;">Rigioca</button>
+				      </div>
+				    </div>
+				  </div>
 				</div>
-				<h1 id="vinto" class="centro" style="display: none;" class="text-white">Complimenti hai vinto <strong>1.000.000 £ in gettoni d'oro!!!</strong> se ti va di rigiocare premi il pulsante qua sotto rigioca</h1>
-				<h1 id="perso" style="display: none;" class="text-white">Hai Perso, occhio al tempo !!!!!</h1>
-				
-				<button type="button" class="btn btn-primary" id="proxdomanda" onclick="ProxDom()" style="margin: 10px; display:none;">Prossima domanda</button>
-				<button type="button" class="btn btn-primary" id="rigioca" onclick="Rigioca()" style="margin: 10px; display:none;">Rigioca</button>
+
+				<div class="card mb-3 centro" id="temposcaduto" style="max-width: 1000px;display: none;background-color:#4b0082;border-color: #4b0082;">
+				  <div class="row no-gutters">
+				    <div class="col-md-4">
+				      <img src="jerryTriste.jpg" class="card-img" alt="...">
+				    </div>
+				    <div class="col-md-8">
+				      <div class="card-body">
+				        <h5 class="card-title text-white">Peccato!!</h5>
+				        <p class="card-text text-white">Il tempo è scaduto. Non ti preoccupare non è facile. Se ti va di rigiocare premi il pulsante "Rigioca" qua sotto</p>
+						<button type="button" class="btn btn-outline-warning" id="rigioca" onclick="playAgain()" style="margin: 10px;">Rigioca</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
+				<div class="card text-center" id="perso" style="max-width: 1000px; display: none; background-color:#4b0082; border-color: #4b0082;">
+				  <div class="row no-gutters">
+				    <div class="col-md-4">
+				      <img src="jerryTriste.jpg" class="card-img" alt="...">
+				    </div>
+				    <div class="col-md-8">
+				      <div class="card-body">
+				        <h5 class="card-title text-white">Peccato!!</h5>
+				        <p class="card-text text-white">La risposta che hai dato non è corretta. Non ti preoccupare non è facile. Se ti va di rigiocare premi il pulsante "Rigioca" qua sotto</p>
+						<button type="button" class="btn btn-outline-warning" id="rigioca" onclick="playAgain()" style="margin: 10px;">Rigioca</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
 			</div>
 		
 
